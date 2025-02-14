@@ -1,0 +1,10 @@
+https://www.section.io/engineering-education/how-to-create-a-simple-rest-api-using-typescript-and-nodejs/
+https://dev.to/nedsoft/getting-started-with-sequelize-and-postgres-emp
+
+https://stackoverflow.com/questions/64864042/multer-is-not-processing-file-upload-in-typescript-node-js
+https://blog.risingstack.com/redis-node-js-introduction-to-caching/
+
+import bcrypt from "bcrypt";
+
+// later
+await bcrypt.compare(password, hash);
