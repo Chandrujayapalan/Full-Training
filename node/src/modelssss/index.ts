@@ -32,7 +32,7 @@ db.Sequelize = Sequelize;
     await db.sequelize.sync({ }).catch((err: any) => {
         console.error('ERROR - Unable to sync', err)
     })
-    console.info('Database is connected.')
+    console.info('Database is connected--------------.')
 }).catch((err: any) => {
     console.error('ERROR - Unable to connect to the database:', err)
 })

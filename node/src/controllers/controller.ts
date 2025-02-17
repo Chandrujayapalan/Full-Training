@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 const sad = []
 import jwt from 'jsonwebtoken'
-import db from '../modelssss';
+import db from '../models';
 const {User } = db
 const getPosts = async (req: Request, res: Response, next: NextFunction) => {
     try {

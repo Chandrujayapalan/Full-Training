@@ -1,53 +1,10 @@
-// 'use strict';
-
-// const fs = require('fs');
-// const path = require('path');
-// const Sequelize = require('sequelize');
-// const process = require('process');
-// const basename = path.basename(__filename);
-// const env = process.env.NODE_ENV || 'development';
-// const config = require(__dirname + '/../config/config.js')[env];
-// const db = {};
-
-// let sequelize;
-// if (config.use_env_variable) {
-//   sequelize = new Sequelize(process.env[config.use_env_variable], config);
-// } else {
-//   sequelize = new Sequelize(config.database, config.username, config.password, config);
-// }
-
-// fs
-//   .readdirSync(__dirname)
-//   .filter(file => {
-//     return (
-//       file.indexOf('.') !== 0 &&
-//       file !== basename &&
-//       file.slice(-3) === '.js' &&
-//       file.indexOf('.test.js') === -1
-//     );
-//   })
-//   .forEach(file => {
-//     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-//     db[model.name] = model;
-//   });
-
-// Object.keys(db).forEach(modelName => {
-//   if (db[modelName].associate) {
-//     db[modelName].associate(db);
-//   }
-// });
-
-// db.sequelize = sequelize;
-// db.Sequelize = Sequelize;
-
-// module.exports = db;
 import 'ts-node/register';
 import { Sequelize } from 'sequelize-typescript';
 import { Dialect,  DataTypes } from 'sequelize';
 import config from '../config/config';
 import fs from 'fs';
 import path from 'path';
-require('sequelize-cli/bin/sequelize');
+// require('sequelize-cli/bin/sequelize');
 const basename = path.basename(__filename);
 const dbName = config.development.database as string
 const dbUser = config.development.username as string
@@ -60,7 +17,8 @@ let sequelize = new Sequelize(dbName, dbUser, dbPassword, {
     dialect: dbDriver
 })
 fs.readdirSync(__dirname).filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === 'model.ts');
+    console.log('file.slice(-9)',file.slice(-9));
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-9) === '.model.ts');
 }).forEach(async (file) => {
     const model = await import(path.join(__dirname, file)); // Dynamically import model
     const modelInstance = model.default(sequelize, DataTypes); // Assuming the model exports a default function

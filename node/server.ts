@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import morgan from 'morgan';
 import routes from './src/routes/route';
-import db from './src/modelssss';
+import db from './src/models';
 const app: Express = express();
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
