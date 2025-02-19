@@ -17,7 +17,6 @@ let sequelize = new Sequelize(dbName, dbUser, dbPassword, {
     dialect: dbDriver
 })
 fs.readdirSync(__dirname).filter(file => {
-    console.log('file.slice(-9)',file.slice(-9));
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-9) === '.model.ts');
 }).forEach(async (file) => {
     const model = await import(path.join(__dirname, file)); // Dynamically import model
