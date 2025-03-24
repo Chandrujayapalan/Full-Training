@@ -16,6 +16,7 @@ export const errorLog = (...data: string[]) => {
   return console.log("\x1b[31m%s", ...data);
 };
 export const verifyJwt: any = (token: string) => {
+  console.log('token',token);
   return new Promise((resolve, reject) => {
     verify(token, "process.env.JWT_SECRET", (err, decode) => {
       if (err) {

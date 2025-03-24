@@ -7,9 +7,9 @@ dotenv.config({ path: join(process.cwd(), process.argv[2]) });
 import { log, errorLog } from "./src/utils/helpers";
 const appRoute = express();
 import middlewares from "./src/middleware";
-import Routes from "./src/routes/route";
+import Routes from "./src/routes";
 const PORT = Number(3000);
-// import errorHandler from "./src/middleware/errorHandler";
+import errorHandler from "./src/middleware/errorHandler";
 import db from "./src/models";
 declare global {
     namespace Express {
@@ -19,13 +19,11 @@ declare global {
     }
 }
 middlewares(appRoute).then(async (app: any) => {
-    await db.sequelize.authenticate().then(async () => {
-        await db.sequelize.sync({}).then(async () => {
+    app.use(errorHandler);
             Routes(app)
-            // app.use(errorHandler);
             app.listen(PORT, async () => {
                 log(`Example app listening on port ${PORT}`);
-                log(`DB connection success!, DB -> ${'process.env.DATABASE_NAME'}`);
+                // log(`DB connection success!, DB -> ${'process.env.DATABASE_NAME'}`);
             });
             process.on("unhandledRejection", (error) => {
                 // Will print "unhandledRejection err is not defined"
@@ -46,16 +44,6 @@ middlewares(appRoute).then(async (app: any) => {
                     process.exit(0);  // Exit with status code 0 (successful termination)
                 }
             });
-        }).catch((e) => {
-            errorLog(e, "====> Error on db connection");
-        });
-    }).catch((e) => {
-        errorLog(e, "====> Error on db connection");
-    });
-
-
-
-    // })
 }).catch((e) => {
     errorLog(e, "====> Error on db connection");
 });

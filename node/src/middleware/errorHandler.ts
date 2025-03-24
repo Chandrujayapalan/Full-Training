@@ -2,7 +2,7 @@ import { messages } from "../utils/messages"
 import { Responses as apiResponse } from "../utils/response"
 import status from "../utils/responseStatus";
 // error handler middleware
-export default function (err: any, req: any, res: any, next: any) {
+export default async function (err: any, req: any, res: any, next: any) {
     const code = err.status ? err.status : 500;
     if (err.message === 'Validation error') {
         if (err.fields) {

@@ -4,6 +4,7 @@ import { Dialect, DataTypes } from 'sequelize';
 import config from '../config/config';
 import fs from 'fs';
 import path from 'path';
+import { log } from '../utils/helpers';
 // require('sequelize-cli/bin/sequelize');
 const basename = path.basename(__filename);
 const dbName = config.development.database as string
@@ -17,7 +18,7 @@ let sequelize = new Sequelize(dbName, dbUser, dbPassword, {
     dialect: dbDriver
 })
 const fileRes = fs.readdirSync(__dirname).filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.ts');
 });
 (async () => {
     for (let i = 0; i < fileRes.length; i++) {
@@ -35,17 +36,17 @@ const fileRes = fs.readdirSync(__dirname).filter(file => {
 })();
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-// (async () => {
-//     await db.sequelize.authenticate().then(async () => {
-//         await db.sequelize.sync({}).catch((err: any) => {
-//             console.error('ERROR - Unable to sync', err)
-//         })
-//         console.info('Database is connected.')
+(async () => {
+    await db.sequelize.authenticate().then(async () => {
+        await db.sequelize.sync({}).catch((err: any) => {
+            console.error('ERROR - Unable to sync', err)
+        })
+        log('Database is connected.')
       
-//     }).catch((err: any) => {
-//         console.error('ERROR - Unable to connect to the database:', err)
-//     })
-// })();
+    }).catch((err: any) => {
+        console.error('ERROR - Unable to connect to the database:', err)
+    })
+})();
 
 export default db
 

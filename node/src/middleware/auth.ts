@@ -6,6 +6,7 @@ import { Request, Response, NextFunction } from "express";
 
 export const verifyFromEmployee = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        console.log(' req.headers', req.headers);
         let auth : any = req.headers['authorization'];
         let userDetails = await verifyUser(auth)
         if (1 == 1) {
@@ -21,7 +22,8 @@ export const verifyUser = async (token: string) => {
     try {
         let decoded = await verifyJwt(token)
         let userDetails = {
-            user_id: decoded.user_id,
+            user_id: 1,
+            decoded :decoded
         }
         if (!userDetails) {
             let err = new Error()
